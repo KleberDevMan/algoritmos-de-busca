@@ -101,7 +101,7 @@ def bfs(visited, graph, node, destiny):
           queue.append(neighbour)
 
 
-# bfs(visited, graph, 'A', 'E')
+bfs(visited, graph, 'A', 'E')
 # bfs(visited, torre_hanoi, '0', '14')
 # bfs(visited, torre_hanoi_prof, '0', '18')
 # bfs(visited, ilustracao1, 'teclado', 'sucesso')

@@ -82,20 +82,30 @@ ilustracao1 = {
     'maos':['orelha']
 }
 
-visited = [] # Set to keep track of visited nodes.
+visited = [] # Guarda os nos visitados
 
-def dfs(visited, graph, node, destiny):
-    if destiny == node:
-        visited.append(node)
-    else:
-        if node not in visited and destiny not in visited:
-            visited.append(node)
-            for neighbour in graph[node]:
-                dfs(visited, graph, neighbour, destiny)
+def dfs(node, destiny, arvore):
+    # guarda o nó inicial e o caminho que será percorrido
+    pilha = [(node, [node])]
 
-# dfs(visited, graph, 'A', 'E')
-# dfs(visited, torre_hanoi, '0', '14')
-# dfs(visited, torre_hanoi_prof, '0', '18')
-# dfs(visited, ilustracao1, 'teclado', 'sucesso')
+    # enquanto houver elementos na pilha
+    while(pilha):
+        # remove o ultimo elemnto da pilha
+        (estado, caminho) = pilha.pop()
+        
+        # percorre o filhos do estado atual
+        for neighbour in arvore[estado]:
+
+            # se o filho for o no procurado, retorna o caminho
+            if neighbour == destiny:
+                return(caminho + [neighbour])
+            else: # senao, adiciona o no a pilha e aos nos visitados
+                pilha.append((neighbour,caminho + [neighbour]))
+                visited.append(neighbour)
+
+caminho = dfs('A', 'E', graph)
 print('{}'.format(visited))
 print('nós visitados: {}'.format(len(visited)))
+
+print('{}'.format(caminho))
+print('caminho: ', len(caminho))
