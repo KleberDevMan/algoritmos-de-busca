@@ -88,7 +88,7 @@ def dfs(node, destiny, arvore):
     # guarda o nó inicial e o caminho que será percorrido
     pilha = [(node, [node])]
 
-    # enquanto houver elementos na pilha
+    # roda enquanto houver elementos na pilha
     while(pilha):
         # remove o ultimo elemnto da pilha
         (estado, caminho) = pilha.pop()
@@ -103,7 +103,10 @@ def dfs(node, destiny, arvore):
                 pilha.append((neighbour,caminho + [neighbour]))
                 visited.append(neighbour)
 
+# Testando o algoritmo
 caminho = dfs('A', 'E', graph)
+
+# Resultado do algoritmo
 print('{}'.format(visited))
 print('nós visitados: {}'.format(len(visited)))
 
