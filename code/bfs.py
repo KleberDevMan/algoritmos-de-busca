@@ -82,28 +82,60 @@ ilustracao1 = {
     'maos':['orelha']
 }
 
-visited = [] # List to keep track of visited nodes.
-queue = []     #Initialize a queue
+ilustracao2 = {
+    'teclado':['placa', 'pontos', 'telefone', 'maos'], 
+    'placa':['pessoas', 'cadeirante'],
+    'pessoas':[],
+    'cadeirante':[],
+    'pontos':['sucesso'],
+    'sucesso':[],
+    'telefone':['sucesso', 'orelha'],
+    'orelha':[],
+    'maos':['orelha']
+}
 
-def bfs(visited, graph, node, destiny):
-  if node == destiny:
-    visited.append(node)
-  else:
-    visited.append(node)
-    queue.append(node)
-
+# localiza o caminho mais curto entre 2 nós de um gráfico usando BFS
+def bfs_shortest_path(graph, start, goal):
+    # acompanha os nós explorados
+    explored = []
+    # acompanha todos os caminhos a serem verificados
+    queue = [[start]]
+    percorridos = [start]
+ 
+    # continua em loop até que todos os caminhos possíveis tenham sido verificados
+    if start == goal:
+        return "Essa foi fácil! Origem = Destino"
+ 
+    # continua em loop até que todos os caminhos possíveis tenham sido verificados
     while queue:
-      s = queue.pop(0) 
+        # pop o primeiro caminho da fila
+        path = queue.pop(0)
+        # obtem o último nó do caminho
+        node = path[-1]
+        if node not in explored:
+            neighbours = graph[node]
+            # passar por todos os nós vizinhos, construir um novo caminho e 
+            # coloque-o na fila
+            for neighbour in neighbours:
+                percorridos.append(neighbour)
+                new_path = list(path)
+                new_path.append(neighbour)
+                queue.append(new_path)
+                # caminho de retorno se o vizinho for objetivo
+                if neighbour == goal:
+                    return (new_path, percorridos)
+ 
+            # marcar o nó como explorado
+            explored.append(node)
+ 
+    # caso não haja caminho entre os 2 nós
+    return "Desculpe, mas não existe um caminho de conexão :("
+ 
+(comprimento, nos_percorridos) = bfs_shortest_path(graph, 'A', 'D')
+# (comprimento, nos_percorridos) = bfs_shortest_path(torre_hanoi, '0', '14') 
+# (comprimento, nos_percorridos) = bfs_shortest_path(torre_hanoi_prof, '0', '18')  
+# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao1, 'teclado', 'sucesso') 
 
-      for neighbour in graph[s]:
-        if neighbour not in visited and destiny not in visited:
-          visited.append(neighbour)
-          queue.append(neighbour)
 
-
-bfs(visited, graph, 'A', 'E')
-# bfs(visited, torre_hanoi, '0', '14')
-# bfs(visited, torre_hanoi_prof, '0', '18')
-# bfs(visited, ilustracao1, 'teclado', 'sucesso')
-print('{}'.format(visited))
-print('nós visitados: {}'.format(len(visited)))
+print('comprimento ({}): '.format(len(comprimento)), comprimento)
+print('nos percorridos ({}): '.format(len(nos_percorridos)), nos_percorridos)

@@ -82,7 +82,7 @@ ilustracao1 = {
     'maos':['orelha']
 }
 
-visited = [] # Guarda os nos visitados
+percorridos = [] # Guarda os nos visitados
 
 def dfs(node, destiny, arvore):
     # guarda o nó inicial e o caminho que será percorrido
@@ -92,23 +92,25 @@ def dfs(node, destiny, arvore):
     while(pilha):
         # remove o ultimo elemnto da pilha
         (estado, caminho) = pilha.pop()
-        
+        percorridos.append(estado)
+
+        # se o estado for igual ao destino retorno o caminho
+        if estado == destiny:
+            return(caminho)
+
         # percorre o filhos do estado atual
         for neighbour in arvore[estado]:
-
-            # se o filho for o no procurado, retorna o caminho
-            if neighbour == destiny:
-                return(caminho + [neighbour])
-            else: # senao, adiciona o no a pilha e aos nos visitados
-                pilha.append((neighbour,caminho + [neighbour]))
-                visited.append(neighbour)
+            # adiciona o no a pilha e aos nos visitados
+            pilha.append((neighbour,caminho + [neighbour]))
 
 # Testando o algoritmo
+
 caminho = dfs('A', 'E', graph)
+# caminho = dfs('0', '14', torre_hanoi)
+# caminho = dfs('0', '18', torre_hanoi_prof)
+# caminho = dfs('teclado', 'sucesso', ilustracao1)
+
 
 # Resultado do algoritmo
-print('{}'.format(visited))
-print('nós visitados: {}'.format(len(visited)))
-
-print('{}'.format(caminho))
-print('caminho: ', len(caminho))
+print('comprimento ({}): '.format(len(caminho)), caminho)
+print('nos percorridos ({}): '.format(len(percorridos)), percorridos)
