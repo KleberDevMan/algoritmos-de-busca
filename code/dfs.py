@@ -71,15 +71,38 @@ torre_hanoi_prof = {
 }
 
 ilustracao1 = {
-    'teclado':['placa', 'pontos', 'telefone', 'maos'], 
-    'placa':['pessoas', 'cadeirante'],
-    'pessoas':[],
-    'cadeirante':[],
-    'pontos':['sucesso'],
-    'sucesso':[],
-    'telefone':['sucesso', 'orelha'],
-    'orelha':[],
-    'maos':['orelha']
+    'A':['B', 'C', 'D', 'E'],
+    'B':['F', 'G'],
+    'C':['H'],
+    'D':['H', 'I'],
+    'E':['J'],
+    'F':[],
+    'G':[],
+    'H':[],
+    'I':[],
+    'J':[]
+}
+
+ilustracao2 = {
+  'A':['B', 'S'],
+  'B':['C', 'G', 'H'],
+  'C':['D', 'F'],
+  'D':['E'],
+  'E':[],
+  'F':['E'],
+  'G':['E'],
+  'H':['F'],
+  'I':['J'],
+  'J':['K', 'L'],
+  'K':[],
+  'L':[],
+  'M':['N', 'O'],
+  'N':['L'],
+  'O':['L', 'P'],
+  'P':[],
+  'Q':[],
+  'R':['Q'],
+  'S':['I', 'M', 'R']
 }
 
 percorridos = [] # Guarda os nos visitados
@@ -108,8 +131,16 @@ def dfs(node, destiny, arvore):
 caminho = dfs('A', 'E', graph)
 # caminho = dfs('0', '14', torre_hanoi)
 # caminho = dfs('0', '18', torre_hanoi_prof)
-# caminho = dfs('teclado', 'sucesso', ilustracao1)
+# caminho = dfs('A', 'H', ilustracao1)
 
+# destino = alvo (E)
+# caminho = dfs('A', 'E', ilustracao2)
+
+# destino = emogi sério (L)
+# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'L') 
+
+# destino = emogi triste (Q)
+# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'Q')
 
 # Resultado do algoritmo
 print('comprimento ({}): '.format(len(caminho)), caminho)

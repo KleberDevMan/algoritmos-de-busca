@@ -70,28 +70,40 @@ torre_hanoi_prof = {
   '26' : ['18']
 }
 
+
 ilustracao1 = {
-    'teclado':['placa', 'pontos', 'telefone', 'maos'], 
-    'placa':['pessoas', 'cadeirante'],
-    'pessoas':[],
-    'cadeirante':[],
-    'pontos':['sucesso'],
-    'sucesso':[],
-    'telefone':['sucesso', 'orelha'],
-    'orelha':[],
-    'maos':['orelha']
+    'A':['B', 'C', 'D', 'E'],
+    'B':['F', 'G'],
+    'C':['H'],
+    'D':['H', 'I'],
+    'E':['J'],
+    'F':[],
+    'G':[],
+    'H':[],
+    'I':[],
+    'J':[]
 }
 
 ilustracao2 = {
-    'teclado':['placa', 'pontos', 'telefone', 'maos'], 
-    'placa':['pessoas', 'cadeirante'],
-    'pessoas':[],
-    'cadeirante':[],
-    'pontos':['sucesso'],
-    'sucesso':[],
-    'telefone':['sucesso', 'orelha'],
-    'orelha':[],
-    'maos':['orelha']
+  'A':['B', 'S'],
+  'B':['C', 'G', 'H'],
+  'C':['D', 'F'],
+  'D':['E'],
+  'E':[],
+  'F':['E'],
+  'G':['E'],
+  'H':['F'],
+  'I':['J'],
+  'J':['K', 'L'],
+  'K':[],
+  'L':[],
+  'M':['N', 'O'],
+  'N':['L'],
+  'O':['L', 'P'],
+  'P':[],
+  'Q':[],
+  'R':['Q'],
+  'S':['I', 'M', 'R']
 }
 
 # localiza o caminho mais curto entre 2 nós de um gráfico usando BFS
@@ -110,6 +122,7 @@ def bfs_shortest_path(graph, start, goal):
     while queue:
         # pop o primeiro caminho da fila
         path = queue.pop(0)
+
         # obtem o último nó do caminho
         node = path[-1]
         if node not in explored:
@@ -131,11 +144,19 @@ def bfs_shortest_path(graph, start, goal):
     # caso não haja caminho entre os 2 nós
     return "Desculpe, mas não existe um caminho de conexão :("
  
-(comprimento, nos_percorridos) = bfs_shortest_path(graph, 'A', 'D')
+# (comprimento, nos_percorridos) = bfs_shortest_path(graph, 'A', 'D')
 # (comprimento, nos_percorridos) = bfs_shortest_path(torre_hanoi, '0', '14') 
 # (comprimento, nos_percorridos) = bfs_shortest_path(torre_hanoi_prof, '0', '18')  
-# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao1, 'teclado', 'sucesso') 
+# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao1, 'A', 'H') 
 
+# destino = alvo (E)
+(comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'E') 
+
+# destino = emogi sério (L)
+# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'L') 
+
+# destino = emogi triste (Q)
+# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'Q') 
 
 print('comprimento ({}): '.format(len(comprimento)), comprimento)
 print('nos percorridos ({}): '.format(len(nos_percorridos)), nos_percorridos)
