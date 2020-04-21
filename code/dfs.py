@@ -107,9 +107,9 @@ ilustracao2 = {
 
 percorridos = [] # Guarda os nos visitados
 
-def dfs(node, destiny, arvore):
+def dfs(estado, destiny, arvore):
     # guarda o nó inicial e o caminho que será percorrido
-    pilha = [(node, [node])]
+    pilha = [(estado, [estado])]
 
     # roda enquanto houver elementos na pilha
     while(pilha):
@@ -122,25 +122,25 @@ def dfs(node, destiny, arvore):
             return(caminho)
 
         # percorre o filhos do estado atual
-        for neighbour in arvore[estado]:
+        for neighbour in reversed(arvore[estado]):
             # adiciona o no a pilha e aos nos visitados
             pilha.append((neighbour,caminho + [neighbour]))
 
 # Testando o algoritmo
 
-caminho = dfs('A', 'E', graph)
+# caminho = dfs('A', 'E', graph)
 # caminho = dfs('0', '14', torre_hanoi)
 # caminho = dfs('0', '18', torre_hanoi_prof)
-# caminho = dfs('A', 'H', ilustracao1)
+caminho = dfs('A', 'H', ilustracao1)
 
 # destino = alvo (E)
 # caminho = dfs('A', 'E', ilustracao2)
 
-# destino = emogi sério (L)
-# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'L') 
-
 # destino = emogi triste (Q)
-# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'Q')
+# caminho = dfs('A', 'Q', ilustracao2)
+
+# destino = emogi sério (L)
+# caminho = dfs('A', 'L', ilustracao2)
 
 # Resultado do algoritmo
 print('comprimento ({}): '.format(len(caminho)), caminho)

@@ -146,11 +146,11 @@ def bfs_shortest_path(graph, start, goal):
  
 # (comprimento, nos_percorridos) = bfs_shortest_path(graph, 'A', 'D')
 # (comprimento, nos_percorridos) = bfs_shortest_path(torre_hanoi, '0', '14') 
-# (comprimento, nos_percorridos) = bfs_shortest_path(torre_hanoi_prof, '0', '18')  
+(comprimento, nos_percorridos) = bfs_shortest_path(torre_hanoi_prof, '0', '18')  
 # (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao1, 'A', 'H') 
 
 # destino = alvo (E)
-(comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'E') 
+# (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'E') 
 
 # destino = emogi sério (L)
 # (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao2, 'A', 'L') 
