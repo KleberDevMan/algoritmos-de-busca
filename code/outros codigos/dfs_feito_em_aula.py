@@ -1,19 +1,6 @@
+# DFS feito pelo Gabriel junto com o professor na aula do dia 15/04/2020
+
 ### MODELAGEM ###
-
-# Arvore com custos
-## key: value
-## chave : valor
-# Dicionário - entre chaves
-
-'''
-{
-    'A':
-        'filhos': ['B', 'C', 'D', 'E'],
-        'custos': {'B': 4, 'C': 3, 'D': 2, 'E': 10}
-}
-
-'''
-import heapq
 arvore = {'A': {'filhos': ['B', 'C', 'D', 'E'], 'custos': {'B': 4, 'C': 3, 'D': 2, 'E': 10}},
           'B': {'filhos': ['F', 'G'], 'custos': {'A': 4, 'F': 5, 'G': 7}},
           'C': {'filhos': ['H'], 'custos': {'A': 3, 'H': 10}},
@@ -26,7 +13,7 @@ arvore = {'A': {'filhos': ['B', 'C', 'D', 'E'], 'custos': {'B': 4, 'C': 3, 'D': 
           'J': {'filhos': [], 'custos': {'E': 10}}
           }
 
-
+import heapq
 def dfs(arvore, node_inicio, objetivo):
 
     # Pilha - O primeiro que entra, ultimo a sair
