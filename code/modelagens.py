@@ -114,55 +114,76 @@ ucs_arvore = {'A': {'filhos': ['B', 'C', 'D', 'E'], 'custos': {'B': 4, 'C': 3, '
               'J': {'filhos': [], 'custos': {'E': 10}}
               }
 
-ilustracao2A = {
-    'A': {
-        'filhos': ['B', 'C', 'D', 'E'],
-        'custos': {'B': 4, 'C': 3, 'D': 2, 'E': 10},
-        'heuristicas': {'B': 9, 'C': 4, 'D': 7, 'E': 11}
-    },
-    'B': {
-        'filhos': ['F', 'G'],
-        'custos': {'A': 4, 'F': 5, 'G': 7},
-        'heuristicas': {'F': 7, 'G': 3}
-    },
-    'C': {
-        'filhos': ['H'],
-        'custos': {'A': 3, 'H': 10},
-        'heuristicas': {'H': 0}
-    },
-    'D': {
-        'filhos': ['H', 'I'],
-        'custos': {'A': 2, 'H': 12, 'I': 8},
-        'heuristicas': {'H': 0, 'I': 13}
-    },
-    'E': {
-        'filhos': ['J'],
-        'custos': {'A': 7, 'J': 10},
-        'heuristicas': {'J': 15}
-    },
-    'F': {
-        'filhos': [],
-        'custos': {'B': 5},
-        'heuristicas': {}
-    },
-    'G': {
-        'filhos': [],
-        'custos': {'B': 7},
-        'heuristicas':{}
-    },
-    'H': {
-        'filhos': [],
-        'custos': {'C': 10, 'D': 12},
-        'heuristicas': {}
-    },
-    'I': {
-        'filhos': [],
-        'custos': {'D': 8},
-        'heuristicas': {}
-    },
-    'J': {
-        'filhos': [],
-        'custos': {'E': 10},
-        'heuristicas': {}
-    }
-}
+ilustracao_a = {'A': {'h': 50, 'filhos': ['B', 'C', 'D', 'E'], 'custos': {'B': 4, 'C': 3, 'D': 2, 'E': 10}},
+                'B': {'h': 9, 'filhos': ['F', 'G'], 'custos': {'A': 4, 'F': 5, 'G': 7}},
+                'C': {'h': 4, 'filhos': ['H'], 'custos': {'A': 3, 'H': 10}},
+                'D': {'h': 7, 'filhos': ['H', 'I'], 'custos': {'A': 2, 'H': 12, 'I': 8}},
+                'E': {'h': 11, 'filhos': ['J'], 'custos': {'A': 7, 'J': 10}},
+                'F': {'h': 7, 'filhos': [], 'custos': {'B': 5}},
+                'G': {'h': 3, 'filhos': [], 'custos': {'B': 7}},
+                'H': {'h': 0, 'filhos': [], 'custos': {'C': 10, 'D': 12}},
+                'I': {'h': 13, 'filhos': [], 'custos': {'D': 8}},
+                'J': {'h': 15, 'filhos': [], 'custos': {'E': 10}}
+                }
+
+ilustracao_b = {'A': {'h': 110,
+                      'filhos': ['B', 'C'],
+                      'custos': {'B': 21, 'C': 19}},
+                'B': {'h': 99,
+                      'filhos': ['D', 'E', 'F'],
+                      'custos': {'A': 21, 'D': 11, 'E': 8, 'F': 10}},
+                'C': {'h': 97,
+                      'filhos': ['G', 'H', 'I'],
+                      'custos': {'A': 19, 'G': 17, 'H': 10, 'I': 13}},
+                'D': {'h': 11,
+                      'filhos': ['J', 'KA'],
+                      'custos': {'B': 11, 'J': 7, 'KA': 9}},
+                'E': {'h': 12,
+                      'filhos': ['L'],
+                      'custos': {'B': 8, 'L': 8}},
+                'F': {'h': 13,
+                      'filhos': ['KB'],
+                      'custos': {'B': 10, 'KB': 7}},
+                'G': {'h': 9,
+                      'filhos': ['M'],
+                      'custos': {'C': 17, 'M': 6}},
+                'H': {'h': 16,
+                      'filhos': ['N', 'O'],
+                      'custos': {'C': 10, 'N': 5, 'O': 5}},
+                'I': {'h': 15,
+                      'filhos': ['P'],
+                      'custos': {'C': 13, 'P': 7}},
+                'J': {'h': 4,
+                      'filhos': ['L'],
+                      'custos': {'D': 7, 'L': 7}},
+                'KA': {'h': 7,
+                       'filhos': ['L'],
+                       'custos': {'D': 9, 'L': 4}},
+                'KB': {'h': 7,
+                       'filhos': ['L'],
+                       'custos': {'F': 7, 'L': 3}},
+                'L': {'h': 0,
+                      'filhos': [],
+                      'custos': {'J': 7, 'KA': 4, 'E': 8, 'KB': 3}},
+                'M': {'h': 18,
+                      'filhos': ['Q', 'R'],
+                      'custos': {'G': 6, 'Q': 9, 'R': 2}},
+                'N': {'h': 21,
+                      'filhos': ['R'],
+                      'custos': {'H': 5, 'R': 2}},
+                'O': {'h': 27,
+                      'filhos': ['R', 'S'],
+                      'custos': {'H': 5, 'R': 3, 'S': 4}},
+                'P': {'h': 37,
+                      'filhos': [],
+                      'custos': {'I': 7}},
+                'Q': {'h': 23,
+                      'filhos': [],
+                      'custos': {'M': 9}},
+                'R': {'h': 33,
+                      'filhos': [],
+                      'custos': {'M': 2, 'N': 2, 'O': 3}},
+                'S': {'h': 35,
+                      'filhos': [],
+                      'custos': {'O': 4}}
+                }
