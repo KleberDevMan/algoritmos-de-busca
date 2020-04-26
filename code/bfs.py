@@ -49,6 +49,8 @@ def bfs_shortest_path(graph, start, goal):
 # atividade 01/04: TORRE MODELAGEM 2
 # (comprimento, nos_percorridos) = bfs_shortest_path(m.torre_hanoi_prof, '0', '18')  
 
+
+
 # atividade 01/04: FIGURA A
 # (comprimento, nos_percorridos) = bfs_shortest_path(ilustracao1, 'A', 'H') 
 
