@@ -1,7 +1,7 @@
 import modelagens as m
 import heapq
 
-def gulosa(arvore,node_inicio,objetivo):
+def guloso(arvore,node_inicio,objetivo):
     fila = []
     heapq.heappush(fila,(arvore[node_inicio]['h'],(node_inicio,[node_inicio],0)))
     nos_visitados =[]
@@ -19,14 +19,15 @@ def gulosa(arvore,node_inicio,objetivo):
             custo_acc = custo + arvore[filho]['custos'][pai]
             heapq.heappush(fila,(arvore[filho]['h'],(filho,caminho + [filho],custo_acc)))
 
+# atividade 15/04: FIGURA A
+# result = guloso(m.ilustracao_a,'A','H')
 
-# result = gulosa(m.ilustracao_a,'A','H')
-result = gulosa(m.ilustracao_b,'A','L')
+# atividade 15/04: FIGURA B
+result = guloso(m.ilustracao_b,'A','L')
 
 result_formatado = {
     'caminho ({})'.format(len(result['caminho'])): result['caminho'],
     'custo' : result['custo'],
     'nos_visitados ({})'.format(len(result['nos_visitados'])): result['nos_visitados']
 }
-
 print('Guloso: ',result_formatado)

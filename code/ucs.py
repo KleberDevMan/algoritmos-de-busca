@@ -36,6 +36,9 @@ def ucs(arvore, inicio, objetivo):
             heapq.heappush(fila_prioridade, (custo_acc,
                                              (filho, caminho + [filho])))
 
+# atividade 15/04: FIGURA A
+# print('UCS: ', ucs(m.ilustracao_a, 'A', 'H'))
 
-print('UCS: ', ucs(m.ucs_arvore, 'A', 'H'))
+# atividade 15/04: FIGURA B
+print('UCS: ', ucs(m.ilustracao_b, 'A', 'L'))
 

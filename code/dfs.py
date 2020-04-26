@@ -1,12 +1,11 @@
 # Programa Python3 para imprimir a travessia do 
 # Depth First Search (DFS): Profundidade primeiro
-
 import modelagens as m
 
-percorridos = [] # Guarda os nos visitados
 def dfs(estado, destiny, arvore):
     # guarda o nó inicial e o caminho que será percorrido
     pilha = [(estado, [estado])]
+    percorridos = [] # Guarda os nos visitados
 
     # roda enquanto houver elementos na pilha
     while(pilha):
@@ -16,35 +15,20 @@ def dfs(estado, destiny, arvore):
 
         # se o estado for igual ao destino retorno o caminho
         if estado == destiny:
-            return(caminho)
+            return(caminho, percorridos)
 
         # percorre o filhos do estado atual
-        for neighbour in reversed(arvore[estado]):
+        for neighbour in reversed(arvore[estado]['filhos']):
             # adiciona o no a pilha e aos nos visitados
             pilha.append((neighbour,caminho + [neighbour]))
 
+# atividade 15/04: FIGURA A
+# (caminho, percorridos) = dfs('A', 'H', m.ilustracao_a)
 
-# Graph
-caminho = dfs('A', 'E', m.graph)
-
-# atividade 01/04: TORRE MODELAGEM 1
-# caminho = dfs('0', '14', m.torre_hanoi)
-
-# atividade 01/04: TORRE MODELAGEM 2
-# caminho = dfs('0', '18', m.torre_hanoi_prof)
-
-# atividade 01/04: FIGURA A
-# caminho = dfs('A', 'H', m.ilustracao1)
-
-# atividade 01/04: FIGURA B
-# caminho = dfs('A', 'E', m.ilustracao2)
-
-# atividade 01/04: FIGURA C
-# caminho = dfs('A', 'Q', m.ilustracao2)
-
-# atividade 01/04: FIGURA D
-# caminho = dfs('A', 'L', m.ilustracao2)
+# atividade 15/04: FIGURA B
+(caminho, percorridos) = dfs('A', 'L', m.ilustracao_b)
 
 # RESULTADOS
+print('>>> DFS')
 print('comprimento ({}): '.format(len(caminho)), caminho)
 print('nos percorridos ({}): '.format(len(percorridos)), percorridos)
