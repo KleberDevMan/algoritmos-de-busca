@@ -38,4 +38,6 @@ def dfs(arvore, node_inicio, objetivo):
             pilha.append((filho, caminho + [filho]))
 
 
-print(dfs(arvore, 'A', 'H'))
+resultado = dfs(arvore, 'A', 'H')
+print(resultado)
+print('comprimento do caminho: ', len(resultado['caminho']))
