@@ -23,11 +23,21 @@ def guloso(arvore,node_inicio,objetivo):
 # result = guloso(m.ilustracao_a,'A','H')
 
 # atividade 15/04: FIGURA B
-result = guloso(m.ilustracao_b,'A','L')
+# result = guloso(m.ilustracao_b,'A','L')
+
+# atividade 15/04: FIGURA C
+# result = guloso(m.ilustracao_c,'A','P')
+
+# atividade 15/04: FIGURA D
+# result = guloso(m.ilustracao_d,'A','R')
+
+# atividade 15/04: PANQUECAS
+result = guloso(m.panquecas,'A','D')
 
 result_formatado = {
     'caminho ({})'.format(len(result['caminho'])): result['caminho'],
     'custo' : result['custo'],
     'nos_visitados ({})'.format(len(result['nos_visitados'])): result['nos_visitados']
 }
-print('Guloso: ',result_formatado)
+print('>>> Guloso')
+print(result_formatado)

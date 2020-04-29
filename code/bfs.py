@@ -43,7 +43,16 @@ def bfs_shortest_path(graph, start, goal):
 # (comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_a, 'A', 'H') 
 
 # atividade 15/04: FIGURA B
-(comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_b, 'A', 'L') 
+# (comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_b, 'A', 'L') 
+
+# atividade 15/04: FIGURA C
+# (comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_c, 'A', 'P')
+
+# atividade 15/04: FIGURA D
+# (comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_d, 'A', 'R')
+
+# atividade 15/04: PANQUECAS
+(comprimento, nos_percorridos) = bfs_shortest_path(m.panquecas, 'A', 'D')
 
 print('>>> BFS')
 print('comprimento ({}): '.format(len(comprimento)), comprimento)
