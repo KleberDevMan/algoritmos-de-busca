@@ -33,7 +33,7 @@ def bfs(grafo, movimento, grid):
 
     # verificar se esse nó é objetivo
     if np.array_equal(grafo['ini']['xy'], objetivo['xy']):
-        print("Essa foi fácil! Origem = Destino")
+        print(">> Essa foi fácil! Origem = Destino")
         return grafo['ini'], nos_expandidos
 
 
@@ -70,12 +70,22 @@ def bfs(grafo, movimento, grid):
                     all(filho_xy <= grid[1])):
 
                     # heu = calc_heuristica(filho_xy,objetivo['xy'])
+
+                    # adiciona caminho
                     caminho = copy.deepcopy(pai['path'])
                     caminho.append(tuple(filho_xy))
-                    filho = {'xy': filho_xy, 'g': 0, 'h': 0, 'path': caminho}
+
+                    # definino valores do filho
+                    filho = {'xy': filho_xy, 
+                    'g': 0, 
+                    'h': 0, 
+                    'path': caminho}
+
+                    # adiciona filho no grafo
                     nome_filho = str(tuple(filho_xy))
                     grafo[nome_filho] = filho
 
+                    # adiciona filho na lista
                     fila.append((nome_filho))
 
                 # se esse nó filho ultrapassar os limites
@@ -88,7 +98,7 @@ def bfs(grafo, movimento, grid):
 def dfs(grafo, movimento, grid):
     pilha           = [('ini')]
     objetivo        = grafo['fim']
-    # guarda os nos visitados
+
     nos_expandidos  = set()    
     
     while pilha:
@@ -152,7 +162,7 @@ movimento = {
 
 ### inicio e objetivo randomico
 ini   = np.array([10,10])
-fim   = np.array([12,12])
+fim   = np.array([2,2])
 # ini     = np.random.randint(50,size=2)
 # fim     = np.random.randint(50,size=2)
 heu     = calc_heuristica(ini,fim)
@@ -168,15 +178,15 @@ plt.plot(fim[0], fim[1], "xb")
 #algs =  {'astar': astar, 'ucs': ucs, 
 #            'guloso': guloso, 'bfs': bfs, 'dfs': dfs}
 
-# algs = {'dfs': dfs}
+algs = {'dfs': dfs}
 # algs = {'bfs': bfs}
-algs = {'ucs': ucs}
+# algs = {'ucs': ucs}
 
 for _, alg in algs.items():
     tini            = time.time()
     ret, no_exps    = alg(grafo, movimento, grid)
     tfim            = time.time()
-    print(tfim - tini)    
+    # print(tfim - tini)    
 
     res = { 'cumprimento do caminho': len(ret['path']), 
             'expandidos': len(no_exps), 
@@ -185,8 +195,8 @@ for _, alg in algs.items():
 
     print(res)
 
-    rx = np.unique(np.array(ret['path'])[:,0])
-    ry = np.unique(np.array(ret['path'])[:,1])
+    rx = np.array(ret['path'])[:,0]
+    ry = np.array(ret['path'])[:,1]
 
     plt.plot(rx, ry, "-r")
     plt.show()
