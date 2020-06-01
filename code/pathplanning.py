@@ -15,20 +15,24 @@ def draw(no):
                                  lambda event: [exit(0) if event.key == 'escape' else None])
 
 
-def calc_heuristica(inicio, objetivo):
-    # numero de passos restantes
-    # h = abs(sum(inicio - objetivo))
+def calc_heuristica(inicio, objetivo, h_pai=0):
+    if h_pai == 0:
+        # Número de passos até o objetivo
+        # h = abs(sum(inicio - objetivo))
 
-    # distância euclidiana
-    # h = math.sqrt(sum(inicio - objetivo)**2)
-    # h = distance.euclidean(inicio, fim)
+        # Distância Euclidiana
+        # h = math.sqrt(sum(inicio - objetivo)**2)
+        # h = distance.euclidean(inicio, fim)
 
-    # distância de manrratan
-    h = distance.cityblock(inicio, fim)
+        # Distância de Manhattan
+        h = distance.cityblock(inicio, fim)
 
-    #
+        return h
+    else:
+        # Heurística inconssistente
+        h = -1
 
-    return h
+        return h
 
 
 def astar(grafo, movimento, grid):
@@ -81,39 +85,38 @@ def astar(grafo, movimento, grid):
                 # definindo um movimento do robô
                 filho_xy = np.add(pai['xy'], mov['xy'])
 
-                # Avalia se a heurística é consistente
-                #   a partir desse nó filho
-                fa = (pai['g'] + pai['h'])
-                fc = (pai['g'] + mov['g'] +
-                      calc_heuristica(filho_xy, objetivo['xy']))
-                if (fa > fc):
-                    heuristica_error.append(filho_xy)
-
                 if (all(filho_xy >= grid[0]) and
                         all(filho_xy <= grid[1])):
 
                     # seta heuristica
                     heu = calc_heuristica(filho_xy, objetivo['xy'])
 
+                    # Avalia se a heurística é consistente
+                    #   a partir desse nó filho
+                    fa = (pai['g'] + pai['h'])
+                    fc = (pai['g'] + mov['g'] + heu)
+                    if (fa > fc):
+                        heuristica_error.append(filho_xy)
+
                     # seta caminho
-                    caminho = copy.deepcopy(pai['path'])
+                    caminho=copy.deepcopy(pai['path'])
                     caminho.append(tuple(filho_xy))
 
                     # definino valores do filho
-                    filho = {'xy': filho_xy,
+                    filho={'xy': filho_xy,
                              'g': 1,
                              'h': heu,
                              'path': caminho}
 
-                    custo_acc = g + filho['g']
+                    custo_acc=g + filho['g']
 
                     # adiciona filho no grafo
-                    nome_filho = str(tuple(filho_xy))
-                    grafo[nome_filho] = filho
+                    nome_filho=str(tuple(filho_xy))
+                    grafo[nome_filho]=filho
 
                     # ordeno a fila de acordo com a heuristica
 
-                    f_filho = custo_acc + filho['h']
+                    f_filho=custo_acc + filho['h']
                     # essa estrutura heap já ordena de acorco com o custo acumulado
                     heapq.heappush(fila_prioridade, (f_filho,
                                                      (custo_acc, nome_filho, caminho)))
@@ -121,24 +124,24 @@ def astar(grafo, movimento, grid):
 
 def ucs(grafo, movimento, grid):
     # Fila de prioridade -> ORDENAR
-    fila_prioridade = []
+    fila_prioridade=[]
     # adicionar na fila de prioridades
     heapq.heappush(fila_prioridade, (0, (('ini'), [('ini')])))
     # nos_visitados = []
-    nos_expandidos = set()
+    nos_expandidos=set()
 
-    objetivo = grafo['fim']
+    objetivo=grafo['fim']
 
     while fila_prioridade:
 
         # retira da fila de prioridades
-        expande = []
+        expande=[]
         # retira o elemento com menor custo acumulativo
         expande.append(heapq.heappop(fila_prioridade))
-        (nome_pai, caminho) = expande[0][1]
-        custo = expande[0][0]
+        (nome_pai, caminho)=expande[0][1]
+        custo=expande[0][0]
 
-        pai = grafo[nome_pai]
+        pai=grafo[nome_pai]
 
         if np.array_equal(pai['xy'], objetivo['xy']):
             return pai, nos_expandidos, []
@@ -158,7 +161,7 @@ def ucs(grafo, movimento, grid):
             # criar filhos e adicionar na fila de prioridade
             for direcao, mov in movimento.items():
                 # definindo um movimento do robô
-                filho_xy = np.add(pai['xy'], mov['xy'])
+                filho_xy=np.add(pai['xy'], mov['xy'])
 
                 if (all(filho_xy >= grid[0]) and
                         all(filho_xy <= grid[1])):
@@ -166,20 +169,20 @@ def ucs(grafo, movimento, grid):
                     # heu = calc_heuristica(filho_xy,objetivo['xy'])
 
                     # seta caminho
-                    caminho = copy.deepcopy(pai['path'])
+                    caminho=copy.deepcopy(pai['path'])
                     caminho.append(tuple(filho_xy))
 
                     # definino valores do filho
-                    filho = {'xy': filho_xy,
+                    filho={'xy': filho_xy,
                              'g': 1,
                              'h': 0,
                              'path': caminho}
 
-                    custo_acc = custo + filho['g']
+                    custo_acc=custo + filho['g']
 
                     # adiciona filho no grafo
-                    nome_filho = str(tuple(filho_xy))
-                    grafo[nome_filho] = filho
+                    nome_filho=str(tuple(filho_xy))
+                    grafo[nome_filho]=filho
 
                     # essa estrutura heap já ordena de acorco com o custo acumulado
                     heapq.heappush(fila_prioridade, (custo_acc,
@@ -188,19 +191,19 @@ def ucs(grafo, movimento, grid):
 
 def guloso(grafo, movimento, grid):
     # print('\n\n\n\n\n\n\n\n')
-    fila = []
+    fila=[]
     heapq.heappush(fila, (grafo['ini']['h'], (('ini'), [('ini')], 0)))
     # nos_visitados =[]
-    nos_expandidos = set()
-    objetivo = grafo['fim']
-    heuristica_error = []
+    nos_expandidos=set()
+    objetivo=grafo['fim']
+    heuristica_error=[]
     while fila:
-        expande = []
+        expande=[]
         expande.append(heapq.heappop(fila))
-        (nome_pai, caminho, custo) = expande[0][1]
+        (nome_pai, caminho, custo)=expande[0][1]
 
-        custo = expande[0][0]
-        pai = grafo[nome_pai]
+        custo=expande[0][0]
+        pai=grafo[nome_pai]
 
         if np.array_equal(pai['xy'], objetivo['xy']):
             return pai, nos_expandidos, heuristica_error
@@ -219,12 +222,12 @@ def guloso(grafo, movimento, grid):
             # criar filhos e adicionar na fila de prioridade
             for direcao, mov in movimento.items():
                 # definindo um movimento do robô
-                filho_xy = np.add(pai['xy'], mov['xy'])
+                filho_xy=np.add(pai['xy'], mov['xy'])
 
                 # Avalia se a heurística é consistente
                 #   a partir desse nó filho
-                fa = (pai['g'] + pai['h'])
-                fc = (pai['g'] + mov['g'] +
+                fa=(pai['g'] + pai['h'])
+                fc=(pai['g'] + mov['g'] +
                       calc_heuristica(filho_xy, objetivo['xy']))
                 if (fa > fc):
                     heuristica_error.append(filho_xy)
@@ -233,23 +236,23 @@ def guloso(grafo, movimento, grid):
                         all(filho_xy <= grid[1])):
 
                     # seta heuristica
-                    heu = calc_heuristica(filho_xy, objetivo['xy'])
+                    heu=calc_heuristica(filho_xy, objetivo['xy'])
 
                     # seta caminho
-                    caminho = copy.deepcopy(pai['path'])
+                    caminho=copy.deepcopy(pai['path'])
                     caminho.append(tuple(filho_xy))
 
                     # definino valores do filho
-                    filho = {'xy': filho_xy,
+                    filho={'xy': filho_xy,
                              'g': 1,
                              'h': heu,
                              'path': caminho}
 
-                    custo_acc = custo + filho['g']
+                    custo_acc=custo + filho['g']
 
                     # adiciona filho no grafo
-                    nome_filho = str(tuple(filho_xy))
-                    grafo[nome_filho] = filho
+                    nome_filho=str(tuple(filho_xy))
+                    grafo[nome_filho]=filho
 
                     # ordeno a fila de acordo com a heuristica
                     # custo_acc = custo + arvore[filho]['custos'][pai]
@@ -259,15 +262,15 @@ def guloso(grafo, movimento, grid):
 
 def bfs(grafo, movimento, grid):
     # print('\n\n\n\n\n\n\n\n')
-    fila = [('ini')]
-    objetivo = grafo['fim']
+    fila=[('ini')]
+    objetivo=grafo['fim']
     # guarda os nos visitados
-    nos_expandidos = set()
+    nos_expandidos=set()
 
     while fila:
         # pop o primeiro caminho da fila
-        (no) = fila.pop(0)
-        pai = grafo[no]
+        (no)=fila.pop(0)
+        pai=grafo[no]
 
         # verificar se esse nó é objetivo de
         if np.array_equal(pai['xy'], objetivo['xy']):
@@ -288,7 +291,7 @@ def bfs(grafo, movimento, grid):
             # expandir -> inserir os filhos na pilha
             for direcao, mov in movimento.items():
                 # definindo um movimento do robô
-                filho_xy = np.add(pai['xy'], mov['xy'])
+                filho_xy=np.add(pai['xy'], mov['xy'])
 
                 # se esse nó filho não ultrapassar os
                 #   limites do ambiente, adiciona ele
@@ -299,18 +302,18 @@ def bfs(grafo, movimento, grid):
                     # heu = calc_heuristica(filho_xy,objetivo['xy'])
 
                     # adiciona caminho
-                    caminho = copy.deepcopy(pai['path'])
+                    caminho=copy.deepcopy(pai['path'])
                     caminho.append(tuple(filho_xy))
 
                     # definino valores do filho
-                    filho = {'xy': filho_xy,
+                    filho={'xy': filho_xy,
                              'g': 0,
                              'h': 0,
                              'path': caminho}
 
                     # adiciona filho no grafo
-                    nome_filho = str(tuple(filho_xy))
-                    grafo[nome_filho] = filho
+                    nome_filho=str(tuple(filho_xy))
+                    grafo[nome_filho]=filho
 
                     # adiciona filho na lista
                     fila.append((nome_filho))
@@ -323,14 +326,14 @@ def bfs(grafo, movimento, grid):
 
 def dfs(grafo, movimento, grid):
     # print('\n\n\n\n\n\n\n\n')
-    pilha = [('ini')]
-    objetivo = grafo['fim']
+    pilha=[('ini')]
+    objetivo=grafo['fim']
 
-    nos_expandidos = set()
+    nos_expandidos=set()
 
     while pilha:
-        (no) = pilha.pop()
-        pai = grafo[no]
+        (no)=pilha.pop()
+        pai=grafo[no]
 
         # verificar se esse nó é objetivo de
         if np.array_equal(pai['xy'], objetivo['xy']):
@@ -351,7 +354,7 @@ def dfs(grafo, movimento, grid):
             # expandir -> inserir os filhos na pilha
             for direcao, mov in movimento.items():
                 # definindo um movimento do robô
-                filho_xy = np.add(pai['xy'], mov['xy'])
+                filho_xy=np.add(pai['xy'], mov['xy'])
 
                 # se esse nó filho não ultrapassar os
                 #   limites do ambiente, adiciona ele
@@ -360,11 +363,11 @@ def dfs(grafo, movimento, grid):
                         all(filho_xy <= grid[1])):
 
                     # heu = calc_heuristica(filho_xy,objetivo['xy'])
-                    caminho = copy.deepcopy(pai['path'])
+                    caminho=copy.deepcopy(pai['path'])
                     caminho.append(tuple(filho_xy))
-                    filho = {'xy': filho_xy, 'g': 0, 'h': 0, 'path': caminho}
-                    nome_filho = str(tuple(filho_xy))
-                    grafo[nome_filho] = filho
+                    filho={'xy': filho_xy, 'g': 0, 'h': 0, 'path': caminho}
+                    nome_filho=str(tuple(filho_xy))
+                    grafo[nome_filho]=filho
 
                     pilha.append((nome_filho))
 
@@ -374,25 +377,25 @@ def dfs(grafo, movimento, grid):
                     continue
 
 
-movimento = {
+movimento={
     'L': {'xy': [1, 0], 'g': 1},
     'N': {'xy': [0, 1], 'g': 1},
     'O': {'xy': [-1, 0], 'g': 1},
     'S': {'xy': [0, -1], 'g': 1}
 }
 
-h_error = []
+h_error=[]
 
 # inicio e objetivo randomico
-ini = np.array([1, 1])
-fim = np.array([10, 10])
+ini=np.array([1, 1])
+fim=np.array([10, 10])
 # ini     = np.random.randint(50,size=2)
 # fim     = np.random.randint(50,size=2)
-heu = calc_heuristica(ini, fim)
+heu=calc_heuristica(ini, fim)
 
-grafo = {'ini': {'xy': ini, 'g': 0, 'h': heu, 'path': [tuple(ini)]},
+grafo={'ini': {'xy': ini, 'g': 0, 'h': heu, 'path': [tuple(ini)]},
          'fim': {'xy': fim, 'g': math.inf, 'h': 0, 'path': fim}}
-grid = np.array([0, 50])
+grid=np.array([0, 50])
 
 # plota no grafico a posicao inicial e final
 plt.plot(ini[0], ini[1], "og")
@@ -405,16 +408,16 @@ plt.plot(fim[0], fim[1], "xb")
 # algs = {'bfs': bfs}
 # algs = {'ucs': ucs}
 # algs = {'guloso': guloso}
-algs = {'astar': astar}
+algs={'astar': astar}
 
 for alg_nome, alg in algs.items():
-    tini = time.time()
-    ret, no_exps, h_error = alg(grafo, movimento, grid)
-    tfim = time.time()
+    tini=time.time()
+    ret, no_exps, h_error=alg(grafo, movimento, grid)
+    tfim=time.time()
     # print(tfim - tini)
 
     if(alg_nome == 'guloso' or alg_nome == 'astar'):
-        res = {'Algoritmo': alg_nome,
+        res={'Algoritmo': alg_nome,
                'cumprimento do caminho': len(ret['path']),
                'expandidos': len(no_exps),
                'tempo': tfim - tini,
@@ -422,7 +425,7 @@ for alg_nome, alg in algs.items():
                'heurísticas inconssistentes:': len(h_error)
                }
     else:
-        res = {'Algoritmo': alg_nome,
+        res={'Algoritmo': alg_nome,
                'cumprimento do caminho': len(ret['path']),
                'expandidos': len(no_exps),
                'tempo': tfim - tini,
@@ -431,8 +434,8 @@ for alg_nome, alg in algs.items():
 
     print(res)
 
-    rx = np.array(ret['path'])[:, 0]
-    ry = np.array(ret['path'])[:, 1]
+    rx=np.array(ret['path'])[:, 0]
+    ry=np.array(ret['path'])[:, 1]
 
     plt.plot(rx, ry, "-r")
     plt.show()
