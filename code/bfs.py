@@ -40,7 +40,7 @@ def bfs_shortest_path(graph, start, goal):
     return "Desculpe, mas não existe um caminho de conexão :("
  
 # atividade 15/04: FIGURA A
-# (comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_a, 'A', 'H') 
+(comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_a, 'A', 'H') 
 
 # atividade 15/04: FIGURA B
 # (comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_b, 'A', 'L') 
@@ -52,7 +52,7 @@ def bfs_shortest_path(graph, start, goal):
 # (comprimento, nos_percorridos) = bfs_shortest_path(m.ilustracao_d, 'A', 'R')
 
 # atividade 15/04: PANQUECAS
-(comprimento, nos_percorridos) = bfs_shortest_path(m.panquecas, 'A', 'D')
+# (comprimento, nos_percorridos) = bfs_shortest_path(m.panquecas, 'A', 'D')
 
 print('>>> BFS')
 print('comprimento ({}): '.format(len(comprimento)), comprimento)

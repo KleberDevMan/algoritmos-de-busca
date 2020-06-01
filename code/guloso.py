@@ -20,7 +20,7 @@ def guloso(arvore,node_inicio,objetivo):
             heapq.heappush(fila,(arvore[filho]['h'],(filho,caminho + [filho],custo_acc)))
 
 # atividade 15/04: FIGURA A
-# result = guloso(m.ilustracao_a,'A','H')
+result = guloso(m.ilustracao_a,'A','H')
 
 # atividade 15/04: FIGURA B
 # result = guloso(m.ilustracao_b,'A','L')
@@ -32,7 +32,7 @@ def guloso(arvore,node_inicio,objetivo):
 # result = guloso(m.ilustracao_d,'A','R')
 
 # atividade 15/04: PANQUECAS
-result = guloso(m.panquecas,'A','D')
+# result = guloso(m.panquecas,'A','D')
 
 result_formatado = {
     'caminho ({})'.format(len(result['caminho'])): result['caminho'],

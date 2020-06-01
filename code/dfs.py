@@ -23,13 +23,13 @@ def dfs(estado, destiny, arvore):
             pilha.append((neighbour,caminho + [neighbour]))
 
 # atividade 15/04: FIGURA A
-# (caminho, percorridos) = dfs('A', 'H', m.ilustracao_a)
+(caminho, percorridos) = dfs('A', 'H', m.ilustracao_a)
 
 # atividade 15/04: FIGURA B
-(caminho, percorridos) = dfs('A', 'L', m.ilustracao_b)
+# (caminho, percorridos) = dfs('A', 'L', m.ilustracao_b)
 
 # atividade 15/04: FIGURA C
-(caminho, percorridos) = dfs('A', 'P', m.ilustracao_c)
+# (caminho, percorridos) = dfs('A', 'P', m.ilustracao_c)
 
 # atividade 15/04: FIGURA D
 # (caminho, percorridos) = dfs('A', 'R', m.ilustracao_d)

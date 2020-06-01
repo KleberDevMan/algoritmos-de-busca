@@ -37,7 +37,7 @@ def ucs(arvore, inicio, objetivo):
                                              (filho, caminho + [filho])))
 
 # atividade 15/04: FIGURA A
-# result = ucs(m.ilustracao_a, 'A', 'H')
+result = ucs(m.ilustracao_a, 'A', 'H')
 
 # atividade 15/04: FIGURA B
 # result = ucs(m.ilustracao_b, 'A', 'L')
@@ -49,7 +49,7 @@ def ucs(arvore, inicio, objetivo):
 # result = ucs(m.ilustracao_d, 'A', 'R')
 
 # atividade 15/04: PANQUECAS
-result = ucs(m.panquecas, 'A', 'D')
+# result = ucs(m.panquecas, 'A', 'D')
 
 result_formatado = {
     'caminho ({})'.format(len(result['caminho'])): result['caminho'],
