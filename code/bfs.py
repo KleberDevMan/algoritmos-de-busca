@@ -6,7 +6,7 @@ def bfs_shortest_path(graph, start, goal):
     # acompanha os nós explorados
     explored = []
     # acompanha todos os caminhos a serem verificados
-    queue = [[start]]
+    queue = [[start]] # fila
     percorridos = [start]
  
     # continua em loop até que todos os caminhos possíveis tenham sido verificados

@@ -1,0 +1,69 @@
+h = heuristica "me diz o quão distante eu estou"
+c = custo
+g = custo acumulado  
+
+
+"custo real de A" = custo de A até o K. Obs.: K é o nó destino
+
+
+-- h admissível
+"heurística <= custo acumulado até o nó destino"
+h(A) <= g(A -> K) Obs.: K é o nó destino
+
+
+
+-- h conssistente
+"A heuristica de A é consistente se: heurísta de A - heuristica de B <= custo de A para B"
+h(A) - h(B) <= c(A -> B)
+ou 
+
+g(A) + h(A) <= g(A) + c(A -> B) + h(B)
+1 + 2 <= 1 + 1 + 1
+true
+
+
+Nota:
+Se a h é conssistente, ela é adminssível.
+No entanto, o contrario não pode dizer que é verdadeiro.
+
+#######################################
+
+
+Requisitos para garantir que o algorítmo vai encontrar melhor caminho:
+
+ÁRVORE: 
+1. h admissível
+
+GRAFO:
+1. h admissível
+2. h conssistente  
+
+#######################################
+
+Biblioteca python para gerar heuristicas:
+# medidas de distancias:
+Scipy 
+
+Euclidiana:
+euclidian(*)
+
+Manrratan:
+cityblock(*)
+
+
+#######################################
+
+atividade nota 3.5 pontos:
+
+> dizer coisas sobre heuristica
+> implementar os algoritmos
+> colher informações
+
+
+     NORTE(N)
+OESTE(W)  LESTE(E)
+      SUL(S)
+
+
+
+
