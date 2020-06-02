@@ -18,13 +18,13 @@ def draw(no):
 def calc_heuristica(inicio, objetivo, h_pai=0):
     if h_pai == 0:
         # Número de passos até o objetivo
-        # h = abs(sum(inicio - objetivo))
+        # h = sum(objetivo - inicio)
 
         # Distância Euclidiana
-        # h = math.sqrt(sum(inicio - objetivo)**2)
         # h = distance.euclidean(inicio, fim)
 
         # Distância de Manhattan
+        # h = math.sqrt(sum(objetivo - inicio)**2)
         h = distance.cityblock(inicio, fim)
 
         return h
@@ -386,11 +386,14 @@ movimento={
 
 h_error=[]
 
-# inicio e objetivo randomico
+# inicio e objetivo statico
 ini=np.array([1, 1])
 fim=np.array([10, 10])
+
+# inicio e objetivo ramdomico
 # ini     = np.random.randint(50,size=2)
 # fim     = np.random.randint(50,size=2)
+
 heu=calc_heuristica(ini, fim)
 
 grafo={'ini': {'xy': ini, 'g': 0, 'h': heu, 'path': [tuple(ini)]},
