@@ -1,3 +1,9 @@
+# Algoritmo Genético:
+#   Inserir um modelo ideal de individuo (numérico).
+#   Encontrar uma populacao que se assemelhe àquele individuo.
+#   Critério de parada: numero de gerações (100)
+#
+#   Códigio referência: https://github.com/anapaulamendes/my-talks-and-workshops/tree/master/python-brasil-2018
 import random
 
 print("Modelo de entrada:")
