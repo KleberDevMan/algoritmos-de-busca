@@ -1,19 +1,22 @@
 # Algoritmo Genético:
-#   Inserir um modelo ideal de individuo (numérico).
-#   Encontrar uma populacao que se assemelhe àquele individuo.
+#   1. Inserir um modelo ideal de individuo (numérico).
+#   2. Encontrar uma populacao que se assemelhe àquele individuo.
+#   
 #   Critério de parada: numero de gerações (100)
 #
 #   Códigio referência: https://github.com/anapaulamendes/my-talks-and-workshops/tree/master/python-brasil-2018
 import random
 
-print("Modelo de entrada:")
-print("a b c d e f g h i ... j")
+# Obter modelo
+print("Exemplo de modelo de entrada:")
+print("1 1 1 1 1 1 1 ... 1")
 print("Digite seu modelo:")
 input_model = input()
 model = [int(i) for i in input_model.split()]
 print("\n")
 print("Modelo: {}".format(model))
 print("\n")
+
 # gera indivíduos com o mesmo tamanho do modelo informado
 individual_size = len(model)
 # tamanho da populacao (stático)
@@ -42,7 +45,8 @@ def fitness(individual):
     for i in range(len(individual)):
         if(individual[i] == model[i]):
             fitness += 1
-    # retorna a nota
+
+    # retorna a nota final do individuo
     return fitness
 
 # seleciona alguns individuos e realiza os cruzamentos
